@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(LoginWithRecoveryCodeModel<>))]
     public abstract class LoginWithRecoveryCodeModel : PageModel
     {
         [BindProperty]
@@ -29,10 +30,10 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeModel where TUser : class
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
 
-        public LoginWithRecoveryCodeModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
+        public LoginWithRecoveryCodeModel(SignInManager<TUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

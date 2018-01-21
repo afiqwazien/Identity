@@ -6,7 +6,7 @@ using System;
 namespace Microsoft.AspNetCore.Identity.UI
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    sealed class IdentityDefaultUIAttribute : Attribute
+    internal sealed class IdentityDefaultUIAttribute : Attribute
     {
         public IdentityDefaultUIAttribute(Type implementationTemplate)
         {

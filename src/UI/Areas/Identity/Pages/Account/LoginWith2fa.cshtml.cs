@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(LoginWith2faModel<>))]
     public abstract class LoginWith2faModel : PageModel
     {
         [BindProperty]
@@ -34,10 +35,10 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class LoginWith2faModel<TUser> : LoginWith2faModel where TUser : class
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LoginWith2faModel> _logger;
 
-        public LoginWith2faModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWith2faModel> logger)
+        public LoginWith2faModel(SignInManager<TUser> signInManager, ILogger<LoginWith2faModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

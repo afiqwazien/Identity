@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(ExternalLoginModel<>))]
     public class ExternalLoginModel : PageModel
     {
         [BindProperty]
@@ -32,13 +33,13 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class ExternalLoginModel<TUser> : ExternalLoginModel where TUser : class
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<TUser> _signInManager;
+        private readonly UserManager<TUser> _userManager;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
+            SignInManager<TUser> signInManager,
+            UserManager<TUser> userManager,
             ILogger<ExternalLoginModel> logger)
         {
             _signInManager = signInManager;
@@ -114,7 +115,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new TUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

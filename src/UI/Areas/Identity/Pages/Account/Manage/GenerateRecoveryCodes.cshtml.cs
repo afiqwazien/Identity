@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
+    [IdentityDefaultUI(typeof(GenerateRecoveryCodesModel<>))]
     public abstract class GenerateRecoveryCodesModel : PageModel
     {
         [TempData]
@@ -18,11 +19,11 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 
     internal class GenerateRecoveryCodesModel<TUser> : GenerateRecoveryCodesModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<TUser> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;
 
         public GenerateRecoveryCodesModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<TUser> userManager,
             ILogger<GenerateRecoveryCodesModel> logger)
         {
             _userManager = userManager;

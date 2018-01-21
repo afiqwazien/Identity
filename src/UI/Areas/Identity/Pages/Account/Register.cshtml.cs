@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(RegisterModel<>))]
     public abstract class RegisterModel : PageModel
     {
         [BindProperty]
@@ -40,14 +41,14 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class RegisterModel<TUser> : RegisterModel where TUser : class
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<TUser> _signInManager;
+        private readonly UserManager<TUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<TUser> userManager,
+            SignInManager<TUser> signInManager,
             ILogger<LoginModel> logger,
             IEmailSender emailSender)
         {
@@ -67,7 +68,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new TUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

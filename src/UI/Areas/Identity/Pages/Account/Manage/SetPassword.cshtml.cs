@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
+    [IdentityDefaultUI(typeof(SetPasswordModel<>))]
     public abstract class SetPasswordModel : PageModel
     {
         [BindProperty]
@@ -34,12 +35,12 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 
     internal class SetPasswordModel<TUser> : SetPasswordModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<TUser> _userManager;
+        private readonly SignInManager<TUser> _signInManager;
 
         public SetPasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<TUser> userManager,
+            SignInManager<TUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

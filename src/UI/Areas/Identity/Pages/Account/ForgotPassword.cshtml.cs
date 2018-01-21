@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(ForgotPasswordModel<>))]
     public abstract class ForgotPasswordModel : PageModel
     {
         [BindProperty]
@@ -25,10 +26,10 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class ForgotPasswordModel<TUser> : ForgotPasswordModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<TUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<TUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

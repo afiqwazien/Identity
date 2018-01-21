@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(LogoutModel<>))]
     public abstract class LogoutModel : PageModel
     {
         public void OnGet()
@@ -17,10 +18,10 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class LogoutModel<TUser> : LogoutModel where TUser : class
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<IdentityUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<TUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

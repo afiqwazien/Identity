@@ -13,10 +13,10 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity.UI
 {
-    internal class IdentityDefaultUIConfigureOptions :
+    internal class IdentityDefaultUIConfigureOptions<TUser> :
         IPostConfigureOptions<RazorPagesOptions>,
         IPostConfigureOptions<StaticFileOptions>,
-        IPostConfigureOptions<CookieAuthenticationOptions>
+        IPostConfigureOptions<CookieAuthenticationOptions> where TUser : class
     {
         private const string IdentityUIDefaultAreaName = "Identity";
 
@@ -35,6 +35,7 @@ namespace Microsoft.AspNetCore.Identity.UI
             options.AllowAreas = true;
             options.Conventions.AuthorizeAreaFolder(IdentityUIDefaultAreaName, "/Account/Manage");
             options.Conventions.AuthorizeAreaPage(IdentityUIDefaultAreaName, "/Account/Logout");
+            options.Conventions.Add(new IdentityPageModelConvention<TUser>());
         }
 
         public void PostConfigure(string name, StaticFileOptions options)

@@ -9,17 +9,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
+    [IdentityDefaultUI(typeof(Disable2faModel<>))]
     public abstract class Disable2faModel : PageModel
     {
     }
 
     internal class Disable2faModel<TUser> : Disable2faModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<TUser> _userManager;
         private readonly ILogger<Disable2faModel> _logger;
 
         public Disable2faModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<TUser> userManager,
             ILogger<Disable2faModel> logger)
         {
             _userManager = userManager;

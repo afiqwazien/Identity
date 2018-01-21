@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
+    [IdentityDefaultUI(typeof(IndexModel<>))]
     public abstract partial class IndexModel : PageModel
     {
         public string Username { get; set; }
@@ -37,13 +38,13 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 
     internal class IndexModel<TUser> : IndexModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<TUser> _userManager;
+        private readonly SignInManager<TUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<TUser> userManager,
+            SignInManager<TUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;

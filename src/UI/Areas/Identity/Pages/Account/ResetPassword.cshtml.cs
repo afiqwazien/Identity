@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(ResetPasswordModel<>))]
     public abstract class ResetPasswordModel : PageModel
     {
         [BindProperty]
@@ -36,9 +37,9 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class ResetPasswordModel<TUser> : ResetPasswordModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<TUser> _userManager;
 
-        public ResetPasswordModel(UserManager<IdentityUser> userManager)
+        public ResetPasswordModel(UserManager<TUser> userManager)
         {
             _userManager = userManager;
         }

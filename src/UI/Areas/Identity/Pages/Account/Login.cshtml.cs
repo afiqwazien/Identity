@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(LoginModel<>))]
     public abstract class LoginModel : PageModel
     {
         [BindProperty]
@@ -41,10 +42,10 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
     internal class LoginModel<TUser> : LoginModel where TUser : class
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<TUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

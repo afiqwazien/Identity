@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
+    [IdentityDefaultUI(typeof(ChangePasswordModel<>))]
     public abstract class ChangePasswordModel : PageModel
     {
         [BindProperty]
@@ -40,13 +41,13 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 
     internal class ChangePasswordModel<TUser> : ChangePasswordModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<TUser> _userManager;
+        private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
 
         public ChangePasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<TUser> userManager,
+            SignInManager<TUser> signInManager,
             ILogger<ChangePasswordModel> logger)
         {
             _userManager = userManager;

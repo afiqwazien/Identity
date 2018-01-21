@@ -9,17 +9,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
+    [IdentityDefaultUI(typeof(ResetAuthenticatorModel<>))]
     public abstract class ResetAuthenticatorModel : PageModel
     {
     }
 
     internal class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel where TUser : class
     {
-        UserManager<IdentityUser> _userManager;
+        UserManager<TUser> _userManager;
         ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<TUser> userManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

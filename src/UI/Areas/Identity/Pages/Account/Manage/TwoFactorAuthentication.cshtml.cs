@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
+    [IdentityDefaultUI(typeof(TwoFactorAuthenticationModel<>))]
     public abstract class TwoFactorAuthenticationModel : PageModel
     {
         public bool HasAuthenticator { get; set; }

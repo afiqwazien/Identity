@@ -8,15 +8,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
+    [IdentityDefaultUI(typeof(ConfirmEmailModel<>))]
     public abstract class ConfirmEmailModel : PageModel
     {
     }
 
     internal class ConfirmEmailModel<TUser> : ConfirmEmailModel where TUser : class
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<TUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<TUser> userManager)
         {
             _userManager = userManager;
         }
