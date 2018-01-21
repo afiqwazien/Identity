@@ -10,7 +10,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
-    public class GenerateRecoveryCodesModel : PageModel
+    public abstract class GenerateRecoveryCodesModel : PageModel
+    {
+        [TempData]
+        public string[] RecoveryCodes { get; set; }
+    }
+
+    internal class GenerateRecoveryCodesModel<TUser> : GenerateRecoveryCodesModel where TUser : class
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;
@@ -22,9 +28,6 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
             _userManager = userManager;
             _logger = logger;
         }
-
-        [TempData]
-        public string[] RecoveryCodes { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {

@@ -9,7 +9,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
-    public class ResetAuthenticatorModel : PageModel
+    public abstract class ResetAuthenticatorModel : PageModel
+    {
+    }
+
+    internal class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel where TUser : class
     {
         UserManager<IdentityUser> _userManager;
         ILogger<ResetAuthenticatorModel> _logger;
@@ -21,6 +25,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
             _userManager = userManager;
             _logger = logger;
         }
+
         public async Task<IActionResult> OnGet()
         {
             var user = await _userManager.GetUserAsync(User);

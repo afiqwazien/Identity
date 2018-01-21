@@ -10,6 +10,10 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
+    }
+
+    internal class PersonalDataModel<TUser> : PersonalDataModel where TUser : class
+    {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 

@@ -12,20 +12,6 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
     public class ExternalLoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<ExternalLoginModel> _logger;
-
-        public ExternalLoginModel(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
-            ILogger<ExternalLoginModel> logger)
-        {
-            _signInManager = signInManager;
-            _userManager = userManager;
-            _logger = logger;
-        }
-
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -41,6 +27,23 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+        }
+    }
+
+    internal class ExternalLoginModel<TUser> : ExternalLoginModel where TUser : class
+    {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger<ExternalLoginModel> _logger;
+
+        public ExternalLoginModel(
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            ILogger<ExternalLoginModel> logger)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _logger = logger;
         }
 
         public IActionResult OnGetAsync()
@@ -105,8 +108,8 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                    ErrorMessage = "Error loading external login information during confirmation.";
-                    return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                ErrorMessage = "Error loading external login information during confirmation.";
+                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
             if (ModelState.IsValid)

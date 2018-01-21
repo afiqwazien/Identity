@@ -9,15 +9,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
-    public class ResetPasswordModel : PageModel
+    public abstract class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-
-        public ResetPasswordModel(UserManager<IdentityUser> userManager)
-        {
-            _userManager = userManager;
-        }
-
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -38,6 +31,16 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
+        }
+    }
+
+    internal class ResetPasswordModel<TUser> : ResetPasswordModel where TUser : class
+    {
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public ResetPasswordModel(UserManager<IdentityUser> userManager)
+        {
+            _userManager = userManager;
         }
 
         public IActionResult OnGet(string code = null)

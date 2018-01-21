@@ -12,17 +12,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
-    public class LoginModel : PageModel
+    public abstract class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
-
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
-        {
-            _signInManager = signInManager;
-            _logger = logger;
-        }
-
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -45,6 +36,18 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+        }
+    }
+
+    internal class LoginModel<TUser> : LoginModel where TUser : class
+    {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<LoginModel> _logger;
+
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        {
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
         public async Task OnGetAsync(string returnUrl = null)

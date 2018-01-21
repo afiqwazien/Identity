@@ -10,7 +10,22 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
-    public class DeletePersonalDataModel : PageModel
+    public abstract class DeletePersonalDataModel : PageModel
+    {
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        public class InputModel
+        {
+            [Required]
+            [DataType(DataType.Password)]
+            public string Password { get; set; }
+        }
+
+        public bool RequirePassword { get; set; }
+    }
+
+    internal class DeletePersonalDataModel<TUser> : DeletePersonalDataModel where TUser : class
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -25,18 +40,6 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
             _signInManager = signInManager;
             _logger = logger;
         }
-
-        [BindProperty]
-        public InputModel Input { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-        }
-
-        public bool RequirePassword { get; set; }
 
         public async Task<IActionResult> OnGet()
         {

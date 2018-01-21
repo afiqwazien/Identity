@@ -10,17 +10,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
-    public class LoginWithRecoveryCodeModel : PageModel
+    public abstract class LoginWithRecoveryCodeModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
-
-        public LoginWithRecoveryCodeModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
-        {
-            _signInManager = signInManager;
-            _logger = logger;
-        }
-
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -33,6 +24,18 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
             [DataType(DataType.Text)]
             [Display(Name = "Recovery Code")]
             public string RecoveryCode { get; set; }
+        }
+    }
+
+    internal class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeModel where TUser : class
+    {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
+
+        public LoginWithRecoveryCodeModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
+        {
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
@@ -65,7 +68,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
             var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
 
             var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
-                
+
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);

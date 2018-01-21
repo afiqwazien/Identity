@@ -12,7 +12,11 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
 {
-    public class DownloadPersonalDataModel : PageModel
+    public abstract class DownloadPersonalDataModel : PageModel
+    {
+    }
+
+    internal class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel where TUser : class
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<DownloadPersonalDataModel> _logger;

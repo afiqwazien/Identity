@@ -10,17 +10,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
-    public class LoginWith2faModel : PageModel
+    public abstract class LoginWith2faModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginWith2faModel> _logger;
-
-        public LoginWith2faModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWith2faModel> logger)
-        {
-            _signInManager = signInManager;
-            _logger = logger;
-        }
-
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -38,6 +29,18 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 
             [Display(Name = "Remember this machine")]
             public bool RememberMachine { get; set; }
+        }  
+    }
+
+    internal class LoginWith2faModel<TUser> : LoginWith2faModel where TUser : class
+    {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<LoginWith2faModel> _logger;
+
+        public LoginWith2faModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWith2faModel> logger)
+        {
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
         public async Task<IActionResult> OnGetAsync(bool rememberMe, string returnUrl = null)
@@ -91,6 +94,6 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
                 ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
                 return Page();
             }
-        }  
+        }
     }
 }

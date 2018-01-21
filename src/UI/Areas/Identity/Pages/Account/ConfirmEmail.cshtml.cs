@@ -8,7 +8,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
-    public class ConfirmEmailModel : PageModel
+    public abstract class ConfirmEmailModel : PageModel
+    {
+    }
+
+    internal class ConfirmEmailModel<TUser> : ConfirmEmailModel where TUser : class
     {
         private readonly UserManager<IdentityUser> _userManager;
 

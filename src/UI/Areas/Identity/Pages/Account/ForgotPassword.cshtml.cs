@@ -10,17 +10,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
 {
-    public class ForgotPasswordModel : PageModel
+    public abstract class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IEmailSender _emailSender;
-
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
-        {
-            _userManager = userManager;
-            _emailSender = emailSender;
-        }
-
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -29,6 +20,18 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+        }
+    }
+
+    internal class ForgotPasswordModel<TUser> : ForgotPasswordModel where TUser : class
+    {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IEmailSender _emailSender;
+
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        {
+            _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         public async Task<IActionResult> OnPostAsync()
