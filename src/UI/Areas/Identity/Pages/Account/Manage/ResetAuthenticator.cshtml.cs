@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
     {
     }
 
-    internal class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel where TUser : class
+    internal class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel where TUser : IdentityUser
     {
         UserManager<TUser> _userManager;
         ILogger<ResetAuthenticatorModel> _logger;

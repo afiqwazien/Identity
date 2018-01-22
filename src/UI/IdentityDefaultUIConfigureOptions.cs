@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Identity.UI
     internal class IdentityDefaultUIConfigureOptions<TUser> :
         IPostConfigureOptions<RazorPagesOptions>,
         IPostConfigureOptions<StaticFileOptions>,
-        IPostConfigureOptions<CookieAuthenticationOptions> where TUser : class
+        IPostConfigureOptions<CookieAuthenticationOptions> where TUser : IdentityUser
     {
         private const string IdentityUIDefaultAreaName = "Identity";
 

@@ -33,7 +33,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
         }
     }
 
-    internal class SetPasswordModel<TUser> : SetPasswordModel where TUser : class
+    internal class SetPasswordModel<TUser> : SetPasswordModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly SignInManager<TUser> _signInManager;

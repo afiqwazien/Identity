@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
     {
     }
 
-    internal class PersonalDataModel<TUser> : PersonalDataModel where TUser : class
+    internal class PersonalDataModel<TUser> : PersonalDataModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;

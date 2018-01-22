@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
         public bool Is2faEnabled { get; set; }
     }
 
-    internal class TwoFactorAuthenticationModel<TUser> : TwoFactorAuthenticationModel where TUser : class
+    internal class TwoFactorAuthenticationModel<TUser> : TwoFactorAuthenticationModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly SignInManager<TUser> _signInManager;

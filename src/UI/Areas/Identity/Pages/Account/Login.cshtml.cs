@@ -40,7 +40,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
         }
     }
 
-    internal class LoginModel<TUser> : LoginModel where TUser : class
+    internal class LoginModel<TUser> : LoginModel where TUser : IdentityUser
     {
         private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;

@@ -39,7 +39,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
         }
     }
 
-    internal class ChangePasswordModel<TUser> : ChangePasswordModel where TUser : class
+    internal class ChangePasswordModel<TUser> : ChangePasswordModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly SignInManager<TUser> _signInManager;

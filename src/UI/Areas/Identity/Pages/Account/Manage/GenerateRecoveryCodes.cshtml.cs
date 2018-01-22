@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
         public string[] RecoveryCodes { get; set; }
     }
 
-    internal class GenerateRecoveryCodesModel<TUser> : GenerateRecoveryCodesModel where TUser : class
+    internal class GenerateRecoveryCodesModel<TUser> : GenerateRecoveryCodesModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;

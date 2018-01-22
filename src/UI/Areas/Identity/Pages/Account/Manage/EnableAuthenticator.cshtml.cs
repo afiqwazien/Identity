@@ -36,7 +36,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
         }
     }
 
-    internal class EnableAuthenticatorModel<TUser> : EnableAuthenticatorModel where TUser : class
+    internal class EnableAuthenticatorModel<TUser> : EnableAuthenticatorModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly ILogger<EnableAuthenticatorModel> _logger;

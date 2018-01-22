@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
     {
     }
 
-    internal class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel where TUser : class
+    internal class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly ILogger<DownloadPersonalDataModel> _logger;

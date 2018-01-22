@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account.Manage
         public string StatusMessage { get; set; }
     }
 
-    internal class ExternalLoginsModel<TUser> : ExternalLoginsModel where TUser : class
+    internal class ExternalLoginsModel<TUser> : ExternalLoginsModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly SignInManager<TUser> _signInManager;

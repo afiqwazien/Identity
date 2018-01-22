@@ -39,7 +39,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
         }
     }
 
-    internal class RegisterModel<TUser> : RegisterModel where TUser : class
+    internal class RegisterModel<TUser> : RegisterModel where TUser : IdentityUser, new()
     {
         private readonly SignInManager<TUser> _signInManager;
         private readonly UserManager<TUser> _userManager;

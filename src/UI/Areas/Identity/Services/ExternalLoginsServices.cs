@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity.UI.Services
 {
-    internal abstract class ExternalLoginsServices
+    public abstract class ExternalLoginsServices
     {
         public abstract Task<bool> HasExternalLoginsAsync();
     }

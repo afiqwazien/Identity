@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
         }
     }
 
-    internal class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeModel where TUser : class
+    internal class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeModel where TUser : IdentityUser
     {
         private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LoginWithRecoveryCodeModel> _logger;

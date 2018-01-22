@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
         }
     }
 
-    internal class LogoutModel<TUser> : LogoutModel where TUser : class
+    internal class LogoutModel<TUser> : LogoutModel where TUser : IdentityUser
     {
         private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;

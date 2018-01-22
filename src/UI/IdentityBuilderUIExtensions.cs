@@ -33,8 +33,13 @@ namespace Microsoft.AspNetCore.Identity
         {
             AddAdditionalApplicationParts(builder);
 
-            builder.Services.ConfigureOptions(typeof(IdentityDefaultUIConfigureOptions<>).MakeGenericType(builder.UserType));
+            builder.Services.ConfigureOptions(
+                typeof(IdentityDefaultUIConfigureOptions<>)
+                    .MakeGenericType(builder.UserType));
             builder.Services.TryAddTransient<IEmailSender, EmailSender>();
+            builder.Services.TryAdd(ServiceDescriptor.Scoped(
+                typeof(ExternalLoginsServices),
+                typeof(ExternalLoginServices<>).MakeGenericType(builder.UserType)));
 
             return builder;
         }

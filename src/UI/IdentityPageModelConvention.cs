@@ -2,14 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Microsoft.AspNetCore.Identity.UI
 {
-    internal class IdentityPageModelConvention<TUser> : IPageApplicationModelConvention where TUser : class
+    internal class IdentityPageModelConvention<TUser> : IPageApplicationModelConvention where TUser : IdentityUser
     {
         public void Apply(PageApplicationModel model)
         {
@@ -18,6 +16,7 @@ namespace Microsoft.AspNetCore.Identity.UI
             {
                 return;
             }
+
             ValidateTemplate(defaultUIAttribute.Template);
             var templateInstance = defaultUIAttribute.Template.MakeGenericType(typeof(TUser));
             model.ModelType = templateInstance.GetTypeInfo();
@@ -25,7 +24,7 @@ namespace Microsoft.AspNetCore.Identity.UI
 
         private void ValidateTemplate(Type template)
         {
-            if(!template.IsAbstract || !template.IsGenericTypeDefinition)
+            if(template.IsAbstract || !template.IsGenericTypeDefinition)
             {
                 throw new InvalidOperationException("Implementation type can't be abstract or non generic.");
             }
@@ -35,7 +34,7 @@ namespace Microsoft.AspNetCore.Identity.UI
                 throw new InvalidOperationException("Implementation type contains wrong generic arity.");
             }
             var argument = genericArguments[0];
-            if (!argument.IsAssignableFrom(typeof(TUser)))
+            if (!typeof(IdentityUser).IsAssignableFrom(typeof(TUser)))
             {
                 throw new InvalidOperationException("Generic implementation type is not compatible.");
             };

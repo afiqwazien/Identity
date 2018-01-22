@@ -33,7 +33,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
         }  
     }
 
-    internal class LoginWith2faModel<TUser> : LoginWith2faModel where TUser : class
+    internal class LoginWith2faModel<TUser> : LoginWith2faModel where TUser : IdentityUser
     {
         private readonly SignInManager<TUser> _signInManager;
         private readonly ILogger<LoginWith2faModel> _logger;

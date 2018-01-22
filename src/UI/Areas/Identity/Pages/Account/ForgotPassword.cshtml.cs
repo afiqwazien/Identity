@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Identity.UI.Pages.Account
         }
     }
 
-    internal class ForgotPasswordModel<TUser> : ForgotPasswordModel where TUser : class
+    internal class ForgotPasswordModel<TUser> : ForgotPasswordModel where TUser : IdentityUser
     {
         private readonly UserManager<TUser> _userManager;
         private readonly IEmailSender _emailSender;
